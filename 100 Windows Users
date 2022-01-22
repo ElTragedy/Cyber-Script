@@ -1,0 +1,18 @@
+$boxUsers = Import-csv " <LOCATION IN FILE> "
+
+#loop through users
+foreach($User in $boxUsers)
+{
+#Read information from csv
+$Password = $User.password #(or you can put "Cybears21!" etc)
+$Firstname = $User.firstname
+$Lastname = $User.lastname
+
+#note, ensure none of these ` have a space following them
+New-LocalUser `
+-Name "$Firstname.$Lastname" `
+-Password (convertto-securestring $Password `
+-AsPlainText `
+-Force) `
+}
+#done
