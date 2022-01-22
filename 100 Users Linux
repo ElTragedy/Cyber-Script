@@ -1,0 +1,10 @@
+#!/bin/bash
+
+INPUT=<csvfile>
+IFS = ','
+
+while read fname lname ; do
+  useradd -m $fname"."$lname
+  passwd $fname"."$lname "Cybears21!" "Cybears21!"
+  
+done < $INPUT
