@@ -1,0 +1,55 @@
+#First you need to Import Active Directory module for running AD cmdlets, this just
+#means that you have prerequisites before you can run the command
+
+Import-Module activeDirectory
+
+#Store the data from your file in the $ADUsers variable (can be named anything, ADUsers
+# keeps it simple for everyone.)
+
+$ADUsers = Import-csv "<LOCATION IN FILE> "
+
+#Loop thorugh each row containing user details in the csv file
+
+foreach ($User in $ADUsers)
+{
+#Read user data form each field in each row and assign the data to a variable
+#as shown below
+
+$Username = $User.username
+$Password = $User.password
+$Firstname = $User.firstname
+$Lastname = $User.lastname
+$OU = $User.ou
+
+#check to see if the user already exist in the AD
+
+if (get-ADUser -F {SamAccountName -eq $Username})
+{
+
+#if the user does not exist give a warning, so you do not get an error
+
+Write-warning "A user account with username $Username already exists in AD."
+}
+else
+{
+
+#User does not exist so proceed to create the new user account
+#Account will be created in the OU provided by the $OU variable read from
+#the csv file
+
+New-ADUSer `
+-SamAccountName $Username `
+-UserPrincipalName "$Username@<DOMAIN>" `
+-Name "$Firstname $Lastname" `
+-Givenname $Firstname `
+-Surname $Lastname `
+-Enabled $True `
+-DisplayName "$Lastname, $Firstname" `
+-Path $OU `
+-AccountPassword (convertto-securestring $Password `
+-AsPlainText `
+-Force) `
+-ChangePasswordAtLogon $True #(Red Team will usually get the same injects you do, have
+#(whoever logs in to score change the password)
+}
+}
