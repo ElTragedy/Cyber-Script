@@ -1,10 +1,23 @@
 #!/bin/bash
 
+#Here is where you specify input is from csv
 INPUT=<csvfile>
+
+#I do not know what this does
 IFS = ','
 
+#while you read names from inputfile
 while read fname lname ; do
+
+  #specify username
   useradd -m $fname"."$lname
-  passwd $fname"."$lname "Cybears21!" "Cybears21!"
   
+  #Specify password
+  echo "Cybears21!" | passwd --stdin $fname"."$lname
+  
+  #passwd $fname"."$lname "Cybears21!" "Cybears21!"
+  
+  
+  #done
 done < $INPUT
+
