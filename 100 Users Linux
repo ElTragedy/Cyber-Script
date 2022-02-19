@@ -6,5 +6,8 @@ INPUT={file-name}
 IFS=","
 while read firstname lastname
 do
-  useradd -m "${firstname}.${lastname}"
+  VAR1="${firstname}.${lastname}"
+  VAR2="Cybears21!" #can be whatever you please
+  useradd -m -s /bin/bash "$VAR1"
+  echo "$VAR1:$VAR2" | chpasswd
 done < $INPUT
