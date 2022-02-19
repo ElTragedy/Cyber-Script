@@ -1,23 +1,10 @@
 #!/bin/bash
 
-#Here is where you specify input is from csv
-INPUT=<csvfile>
-
-#I do not know what this does
-IFS = ','
-
-#while you read names from inputfile
-while read fname lname ; do
-
-  #specify username
-  useradd -m $fname"."$lname
-  
-  #Specify password
-  echo "Cybears21!" | passwd --stdin $fname"."$lname
-  
-  #passwd $fname"."$lname "Cybears21!" "Cybears21!"
-  
-  
-  #done
+#Where is the inputfile from
+INPUT={file-name}
+#what is the delimiter, usually working with csv
+IFS=","
+while read firstname lastname
+do
+  useradd -m "${firstname}.${lastname}"
 done < $INPUT
-
