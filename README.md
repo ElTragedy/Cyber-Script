@@ -1,5 +1,4 @@
 # Cyber-Script
-useful scripts for me to use when I am doing cyber security scenarios
 
-This is practice for CCDC and if I am ever asked to do an inject or need a script for whatever reason
-This repository will contain scripts and what not.
+The following will be copy-paste able scripts that anyone can grab, they vary in utility, as of 4.21.22 I have a list of users and scripts to add those users to
+specific computers
