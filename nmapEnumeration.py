@@ -1,4 +1,3 @@
-``` python
 #!/usr/bin/env python3
 """
 nmap_change_tracker_multi_subnet.py
@@ -321,5 +320,3 @@ if __name__ == "__main__":
         main()
     except KeyboardInterrupt:
         print("\nScript terminated by user.")
-```
-
